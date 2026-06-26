@@ -9,6 +9,18 @@ const PORT = process.env.PORT || 8000;
 app.use(express.json());
 app.use(cors());
 
+// Root endpoint
+app.get('/', (req, res) => {
+    return res.status(200).json({ 
+        message: "Queue Storm Investigator API",
+        version: "1.0.0",
+        endpoints: {
+            health: "GET /health",
+            analyze: "POST /analyze-ticket"
+        }
+    });
+});
+
 // 1. Mandatory Readiness Health Check (Judges Sweep Protocol)
 app.get('/health', (req, res) => {
     return res.status(200).json({ status: "ok" });
